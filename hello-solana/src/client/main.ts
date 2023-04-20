@@ -18,4 +18,16 @@ const PROGRAM_KEYPAIR_PATH = path.join(
     'hello_solana-keypair.json'
   );
 
+  async function main() {
+  
+    console.log("Launching client...");
+  
+    /*
+    Connect to Solana DEV net
+    */
+    let connection = new Connection('https://api.devnet.solana.com', 'confirmed');
+  
+    
+  }
+  
   
