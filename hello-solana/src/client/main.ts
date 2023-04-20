@@ -27,6 +27,14 @@ const PROGRAM_KEYPAIR_PATH = path.join(
     */
     let connection = new Connection('https://api.devnet.solana.com', 'confirmed');
   
+    /*
+    Get our program's public key
+    */
+    const secretKeyString = await fs.readFile(PROGRAM_KEYPAIR_PATH, {encoding: 'utf8'});
+    const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
+    const programKeypair = Keypair.fromSecretKey(secretKey);
+    let programId: PublicKey = programKeypair.publicKey;
+  
     
   }
   
