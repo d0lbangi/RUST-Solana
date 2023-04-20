@@ -35,6 +35,16 @@ const PROGRAM_KEYPAIR_PATH = path.join(
     const programKeypair = Keypair.fromSecretKey(secretKey);
     let programId: PublicKey = programKeypair.publicKey;
   
+    /*
+    Generate an account (keypair) to transact with our program
+    */
+    const triggerKeypair = Keypair.generate();
+    const airdropRequest = await connection.requestAirdrop(
+      triggerKeypair.publicKey,
+      LAMPORTS_PER_SOL,
+    );
+    await connection.confirmTransaction(airdropRequest);
+  
     
   }
   
