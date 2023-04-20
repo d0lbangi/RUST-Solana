@@ -45,7 +45,27 @@ const PROGRAM_KEYPAIR_PATH = path.join(
     );
     await connection.confirmTransaction(airdropRequest);
   
-    
+    /*
+    Conduct a transaction with our program
+    */
+    console.log('--Pinging Program ', programId.toBase58());
+    const instruction = new TransactionInstruction({
+      keys: [{pubkey: triggerKeypair.publicKey, isSigner: false, isWritable: true}],
+      programId,
+      data: Buffer.alloc(0),
+    });
+    await sendAndConfirmTransaction(
+      connection,
+      new Transaction().add(instruction),
+      [triggerKeypair],
+    );
   }
   
   
+  main().then(
+    () => process.exit(),
+    err => {
+      console.error(err);
+      process.exit(-1);
+    },
+  );
